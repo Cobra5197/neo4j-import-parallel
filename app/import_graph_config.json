@@ -1,0 +1,53 @@
+{
+  "defaults": {
+    "batch_size": 5000,
+    "cpu_count": 12,
+    "duckdb_file": "neo4j_import.duckdb"
+  },
+  "imports": [
+    {
+      "name": "Person",
+      "type": "nodes",
+      "csv_file": "data/Person.csv",
+      "table": "person",
+      "primary_key": "id",
+      "cypher_query": "UNWIND $rows AS row MERGE (n:Person {id: row.id}) SET n += row FINISH;"
+    },
+    {
+      "name": "Contract",
+      "type": "nodes",
+      "csv_file": "data/Contract.csv",
+      "table": "contract",
+      "primary_key": "id",
+      "cypher_query": "UNWIND $rows AS row MERGE (n:Contract {id: row.id}) SET n += row FINISH;"
+    },
+    {
+      "name": "Operation",
+      "type": "nodes",
+      "csv_file": "data/Operation.csv",
+      "table": "operation",
+      "primary_key": "id",
+      "cypher_query": "UNWIND $rows AS row MERGE (n:Operation {id: row.id}) SET n += row FINISH;"
+    },
+    {
+      "name": "IS_LINKED_TO",
+      "type": "relationships",
+      "csv_file": "data/IS_LINKED_TO.csv",
+      "table": "is_linked_to",
+      "source_primary_key": "id_source",
+      "target_primary_key": "id_target",
+      "nodes_disjoint": false,
+      "cypher_query": "UNWIND $rows AS row MATCH (src:Person {id: row.id_source}) MATCH (tgt:Person {id: row.id_target}) OPTIONAL MATCH (src)-[r:IS_LINKED_TO]->(tgt) CALL (src, tgt, r) { WHEN r IS NULL THEN { CREATE (src)-[nr:IS_LINKED_TO]->(tgt) RETURN nr } ELSE { RETURN r AS nr } } FINISH;"
+    },
+    {
+      "name": "HAS_OPERATION",
+      "type": "relationships",
+      "csv_file": "data/HAS_OPERATION.csv",
+      "table": "has_operation",
+      "source_primary_key": "id_source",
+      "target_primary_key": "id_target",
+      "nodes_disjoint": true,
+      "cypher_query": "UNWIND $rows AS row MATCH (src:Contract {id: row.id_source}) MATCH (tgt:Operation {id: row.id_target}) OPTIONAL MATCH (src)-[r:HAS_OPERATION]->(tgt) CALL (src, tgt, r) { WHEN r IS NULL THEN { CREATE (src)-[nr:HAS_OPERATION]->(tgt) RETURN nr } ELSE { RETURN r AS nr } } FINISH;"
+    }
+  ]
+}

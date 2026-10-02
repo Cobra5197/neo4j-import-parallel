@@ -1,0 +1,6 @@
+neo4j
+duckdb
+pandas
+python-dotenv
+requests
+urllib3
