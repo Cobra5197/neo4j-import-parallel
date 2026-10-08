@@ -5,21 +5,23 @@ services:
     container_name: neo4j-container
     stop_grace_period: 120s
     environment:
-      - NEO4J_ACCEPT_LICENSE_AGREEMENT=eval
-      - NEO4J_AUTH=neo4j/password
-      - NEO4J_PLUGINS='["apoc", "graph-data-science"]'
-      - NEO4J_dbms_security_procedures_unrestricted=gds.*,apoc.*
-      - NEO4J_dbms_security_procedures_allowlist=gds.*,apoc.*
-      - NEO4J_dbms_security_http__auth__allowlist=/,/browser.*
-      - NEO4J_server_memory_heap_initial__size=4G
-      - NEO4J_server_memory_heap_max__size=4G
-      - NEO4J_server_memory_pagecache_size=3G
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "eval"
+      NEO4J_AUTH: "neo4j/password"
+      NEO4J_PLUGINS: '["apoc", "graph-data-science"]'
+      NEO4J_dbms_security_procedures_unrestricted: "gds.*,apoc.*"
+      NEO4J_dbms_security_procedures_allowlist: "gds.*,apoc.*"
+      NEO4J_dbms_security_http__auth__allowlist: "/,/browser.*"
+      NEO4J_server_memory_heap_initial__size: "4G"
+      NEO4J_server_memory_heap_max__size: "4G"
+      NEO4J_server_memory_pagecache_size: "3G"
     ports:
       - "7474:7474"
       - "7687:7687"
     volumes:
       - ./neo4j/data:/data
       - ./neo4j/logs:/logs
+      - ./neo4j/import:/import
+      - ./neo4j/plugins:/plugins
   python-service:
     container_name: python-container
     build:

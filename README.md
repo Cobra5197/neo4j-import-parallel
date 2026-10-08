@@ -1,11 +1,15 @@
 # Neo4j Import Parallel
 
+Read the medium article: [Massive Parallel Imports in Neo4j Without Deadlock and Lock Contention](https://medium.com/neo4j/massive-parallel-imports-in-neo4j-without-deadlock-and-lock-contention-2c003a48d49a)
+
 ## Important point
 
 The approach presented in this demo requires `block` format storage, available only with Neo4j Enterprise Edition.
 Block format was introduced with Neo4j 5.14 and became the default storage format with Neo4j 5.22.
 
 ## Launch the demo
+
+This Docker Compose setup deploys Neo4j Enterprise 2026.09.0 (evaluation license) with the APOC and Graph Data Science plugins, alongside a custom Python application connected to Neo4j. The Neo4j container is limited to 8 GB of RAM, including a 4 GB heap and a 3 GB page cache. The Python version and installed libraries are defined in the Dockerfile and its dependency file `requirements.txt`.
 
 1. Start the containers:
 ```shell
