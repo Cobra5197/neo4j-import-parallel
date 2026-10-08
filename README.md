@@ -11,6 +11,8 @@ Block format was introduced with Neo4j 5.14 and became the default storage forma
 
 This Docker Compose setup deploys Neo4j Enterprise 2026.09.0 (evaluation license) with the APOC and Graph Data Science plugins, alongside a custom Python application connected to Neo4j. The Neo4j container is limited to 8 GB of RAM, including a 4 GB heap and a 3 GB page cache. The Python version and installed libraries are defined in the Dockerfile and its dependency file `requirements.txt`.
 
+By default, the import is configured to use 12 CPUs. You can update the `cpu_count` parameter [here](app/import_graph_config.json).
+
 1. Start the containers:
 ```shell
 docker compose -f docker-compose.yml up -d
