@@ -1,7 +1,7 @@
 {
   "defaults": {
     "batch_size": 5000,
-    "cpu_count": 12,
+    "cpu_count": 6,
     "duckdb_file": "neo4j_import.duckdb"
   },
   "imports": [
