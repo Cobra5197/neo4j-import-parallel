@@ -812,6 +812,7 @@ def run_import(
 
 
 if __name__ == "__main__":
+    time_total = time.time()
     config_file = Path(sys.argv[1]).resolve()
 
     with open(config_file, encoding="utf-8") as file:
@@ -820,4 +821,8 @@ if __name__ == "__main__":
     defaults = config["defaults"]
 
     for import_config in config["imports"]:
+        time_table = time.time()
         run_import(import_config, defaults, config_file.parent)
+        print(f"\nImport time for {import_config['table']}: {time.time() - time_table} seconds\n", flush=True)
+
+    print(f"\nTotal import time: {time.time() - time_total} seconds\n", flush=True)
