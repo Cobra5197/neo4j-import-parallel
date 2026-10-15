@@ -20,7 +20,7 @@ docker compose -f docker-compose.yml up -d
 
 2. Connect via the [Neo4j Browser](http://localhost:7474/browser/) with the credentials:
 - Database user: neo4j
-- Password: passwod
+- Password: password
 
 3. Check the `neo4j` database storage format:
 ```cypher
@@ -36,12 +36,12 @@ CREATE CONSTRAINT contract_id FOR (n:Contract) REQUIRE n.id IS UNIQUE;
 CREATE CONSTRAINT operation_id FOR (n:Operation) REQUIRE n.id IS UNIQUE;
 ```
 
-4. Start the parallel import:
+5. Start the parallel import:
 ```shell
 docker compose run --remove-orphans python-service python import_graph.py import_graph_config.json
 ```
 
-## Turn-off ressouces
+## Turn-off resources
 
 Stop the container:
 ```shell
