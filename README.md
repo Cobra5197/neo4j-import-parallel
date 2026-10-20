@@ -1,5 +1,11 @@
 # Neo4j Import Parallel
 
+A Python tool for bulk importing large datasets into Neo4j graph databases.
+
+## Why this project
+
+Importing nodes and relationships in parallel can cause lock contention in Neo4j when multiple workers access the same nodes. This tool efficiently schedules partitions into conflict-free batches, so concurrent workers never share a partition.
+
 Read the medium article: [Massive Parallel Imports in Neo4j Without Deadlock and Lock Contention](https://medium.com/neo4j/massive-parallel-imports-in-neo4j-without-deadlock-and-lock-contention-2c003a48d49a)
 
 ## Important point
