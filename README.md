@@ -8,6 +8,8 @@ Importing nodes and relationships in parallel can cause lock contention in Neo4j
 
 Read the medium article: [Massive Parallel Imports in Neo4j Without Deadlock and Lock Contention](https://medium.com/neo4j/massive-parallel-imports-in-neo4j-without-deadlock-and-lock-contention-2c003a48d49a)
 
+This approach can be replicated with any Neo4j drivers and and not necessarily to create nodes/relationships (e.g delete nodes/relationships).
+
 ## Important point
 
 The approach presented in this demo requires `block` format storage, available only with Neo4j Enterprise Edition.
