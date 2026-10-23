@@ -6,7 +6,9 @@ A Python tool for bulk importing large datasets into Neo4j graph databases.
 
 Importing nodes and relationships in parallel can cause lock contention in Neo4j when multiple workers access the same nodes. This tool efficiently schedules partitions into conflict-free batches, so concurrent workers never share a partition.
 
-Read the medium article: [Massive Parallel Imports in Neo4j Without Deadlock and Lock Contention](https://medium.com/neo4j/massive-parallel-imports-in-neo4j-without-deadlock-and-lock-contention-2c003a48d49a)
+Read the Medium articles:
+- [Massive Parallel Imports in Neo4j Without Deadlock and Lock Contention](https://medium.com/neo4j/massive-parallel-imports-in-neo4j-without-deadlock-and-lock-contention-2c003a48d49a)
+- [Implementation of the Neo4j Import Without Deadlock and Lock Contention](https://medium.com/neo4j/implementation-of-the-neo4j-import-without-deadlock-and-lock-contention-1755862e6243)
 
 This approach can be replicated with any Neo4j drivers and and not necessarily to create nodes/relationships (e.g delete nodes/relationships).
 
